@@ -97,10 +97,10 @@
 										</div>
 										<div class="col-4 col-12-medium">
 											<section>
-												<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+												<a href="#" class="image featured"><img id="main-image" alt="" /></a>
 												<header class="second">
-													<h3> Coming soon</h3>
-													<p>Coming soon</p>
+													<h3 id="title"> Coming soon</h3>
+													<p id="caption">Coming soon</p>
 												</header>
 											</section>
 										</div>
@@ -375,6 +375,29 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>// Use fetch to get the JSON file
+    async function getJSON() {
+      const response = await fetch('data.json'); 
+      return await response.json();
+    }
 
+    // Get references to elements
+    const imageElement = document.getElementById('main-image');
+    const captionElement = document.getElementById('caption');
+
+    // Load JSON data
+    getJSON()
+      .then(data => {
+
+        // Get values from JSON
+        const image = data.image; 
+        const caption = data.caption;
+
+        // Update DOM elements
+        imageElement.src = `assets/${image}`;
+        captionElement.innerText = caption;
+
+      });
+	</script>
 	</body>
 </html>
